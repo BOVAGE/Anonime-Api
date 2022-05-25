@@ -1,0 +1,20 @@
+[
+{
+    "model": "message.message",
+    "pk": 1,
+    "fields": {
+        "recipient": 1,
+        "message_text": "You will be fine",
+        "date_sent": "2022-05-24T22:17:18.435Z"
+    }
+},
+{
+    "model": "message.message",
+    "pk": 2,
+    "fields": {
+        "recipient": 1,
+        "message_text": "Focus",
+        "date_sent": "2022-05-24T22:17:35.641Z"
+    }
+}
+]
