@@ -10,6 +10,7 @@ class UserSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         return get_user_model().objects.create_user(**validated_data)
 
+
 class LoginSerializer(serializers.ModelSerializer):
     password = serializers.CharField(min_length=6, write_only=True)
     username = serializers.CharField(min_length=3)
@@ -17,9 +18,11 @@ class LoginSerializer(serializers.ModelSerializer):
         model = get_user_model()
         fields = ['username', 'password']
 
+
 class ChangePasswordSerializer(serializers.Serializer):
     old_password = serializers.CharField(required=True, min_length=6)
     new_password = serializers.CharField(required=True, min_length=6)
+
 
 class UpdateUserProfileSerilaizer(serializers.ModelSerializer):
     class Meta:
@@ -34,7 +37,3 @@ class UpdateUserProfileSerilaizer(serializers.ModelSerializer):
         print('updating user')
         print(instance.username)
         return instance
-
-    # def save(self, **kwargs):
-    #     print("token")
-    #     return "generate token"
