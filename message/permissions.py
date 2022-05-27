@@ -6,7 +6,13 @@ OWNER_METHODS = ('GET','POST', 'DELETE')
 UNAUTH_METHODS = ('POST',)
 
 class IsRecipientOrWriteOnly(permissions.BasePermission):
+    """  
+    allow recipient to able to delete, retrieve, and post to his own message
+    disallow users that are not recipient to ONLY Post message.
 
+    In short, restriction to allow only the recipient of a message to
+    view and delete his/her receieved message.
+    """
     def has_permission(self, request, view):
         recipient_username = view.kwargs.get('recipient_username')
         try:

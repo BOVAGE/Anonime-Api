@@ -44,7 +44,12 @@ class LoginView(generics.GenericAPIView):
                     'token': token
                 }
                 return Response(data, status.HTTP_200_OK)
-            return Response({"details": "Invalid Credentials"},status.HTTP_400_BAD_REQUEST)
+            return Response(
+                {
+                    "details": "Invalid Credentials", 
+                    'status_code': 400
+                }
+                ,status.HTTP_400_BAD_REQUEST)
         return Response(serializer.errors,status.HTTP_400_BAD_REQUEST)
 
 class ChangePasswordView(generics.GenericAPIView):
