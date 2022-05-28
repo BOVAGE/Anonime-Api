@@ -16,11 +16,31 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from rest_framework import permissions
+from drf_yasg.views import get_schema_view
+from drf_yasg import openapi
+
 from django.conf.urls import handler404, handler500, handler400
+
+schema_view = get_schema_view(
+   openapi.Info(
+      title="Anonime API",
+      default_version='v1',
+      description="A RSESTful API for an anonymous messaging service.",
+      terms_of_service="https://www.anonime.xyz/policies/terms/",
+      contact=openapi.Contact(email="contact@anonime.xyz"),
+      license=openapi.License(name="Apache-2.0 license"),
+   ),
+   public=True,
+   permission_classes=[permissions.AllowAny],
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('auth/', include('authentication.urls')),
+    path('', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    path('redoc', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
+
     path('',include('message.urls')),
 ]
 

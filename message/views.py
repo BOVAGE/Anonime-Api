@@ -7,8 +7,10 @@ from django.contrib.auth import get_user_model
 from .serializers import MessageSerializer
 from .models import Message
 from .permissions import IsRecipientOrWriteOnly
+from drf_yasg.utils import swagger_auto_schema
 
 # Create your views here.
+@swagger_auto_schema(method='post', request_body=MessageSerializer)
 @api_view(['GET','POST'])
 @permission_classes([IsRecipientOrWriteOnly])
 def ListCreateMessageView(request, recipient_username):
